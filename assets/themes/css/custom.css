@@ -1,0 +1,64 @@
+.box-login{
+	background-color: #f5f5f5;
+	border-image: none;
+	border-style: solid;
+    border-width: 5px 15px 15px;
+	border-color: #000;
+	bottom: 0;
+    left: 0;
+    min-height: 450px;
+    min-width: 760px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.page-top{
+	background-color: #000;
+    height: 40px;
+}
+
+.page-top img {
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    width: 166px;
+    z-index: 1;
+}
+
+.minimal .page-top {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.login-container{
+	left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    right: 0;
+    top: 35%;
+    z-index: 100;
+}
+
+.login-passdiv{
+	background-color: #f5f5f5;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+}
+
+.login-passbody{
+	margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.boxku {
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 150px;
+    padding: 15px;
+}
+
