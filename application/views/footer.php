@@ -56,4 +56,53 @@
 		
 		
     </script>
+  <script>
+  (function refresh_notification() {
+    $.ajax({
+      type : "GET",
+      url: '<?php echo base_url();?>cms/count_notification', 
+      async: false,
+      dataType: "json",
+      success: function(data) {
+        $('.notifications-menu').empty();
+        $('.notifications-menu').append('\
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">\
+                  <i class="fa fa-bell-o"></i>\
+                  <span class="label label-warning">'+data.notif_unread+'</span>\
+                </a>');
+        var list_string = icon = icon_color = "";
+        for(var i=0; i<data.notifications.length; i++){
+          if(data.notifications[i].category=="new_order")
+            icon = "fa-shopping-cart";
+          else if(data.notifications[i].category=="new_payment_conf")
+            icon = "fa-money";
 
+          if(data.notifications[i].has_been_read=="true")
+            icon_color = "text-green";
+          else if(data.notifications[i].has_been_read=="false")
+            icon_color = "text-red";
+
+          list_string += '<li>\
+                            <a href="<?php echo base_url();?>cms/show_notifications?id='+data.notifications[i].id+'">\
+                              <i class="fa '+icon+' '+icon_color+'"></i> '+data.notifications[i].title+'\
+                            </a>\
+                          </li>';
+        }
+
+        $('.notifications-menu').append('\
+                <ul class="dropdown-menu">\
+                  <li class="header">You have '+data.notif_unread+' unread notifications</li>\
+                  <li>\
+                    <ul class="menu">'+list_string+'</ul>\
+                  </li>\
+                  <li class="footer"><a href="<?php echo base_url();?>cms/show_notifications">View all</a></li>\
+                </ul>');
+      },
+      complete: function() {
+      // Schedule the next request when the current one's complete
+        setTimeout(refresh_notification, 60000);
+      }
+     });
+  })
+  ();
+</script>

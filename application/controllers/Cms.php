@@ -825,4 +825,12 @@ class Cms extends MY_Controller {
 
 		redirect('cms/set_commerce?tab=ship-cost');
 	}
+
+	function count_notification(){
+		$this->load->library('notification');
+		$response['notifications'] = $this->notification->get_data();
+		$response['notif_unread'] = $this->notification->count_unread();
+
+		echo json_encode($response);
+	}
 }
