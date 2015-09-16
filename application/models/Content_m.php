@@ -164,6 +164,7 @@ class Content_m extends CI_Model {
 		$this->db->join('post_categories pc', 'p.category=pc.id');
 		$this->db->where('type', 'post');
 		$this->db->where('slug', $slug);
+		$this->db->order_by('creation_datetime desc');
 		$this->db->limit($limit_end, $limit_start);
 
 		$query = $this->db->get();
@@ -194,6 +195,44 @@ class Content_m extends CI_Model {
 
 		if($query->num_rows() > 0)
 			return $query->row();
+		else
+			return false;
+	}
+
+	function get_media($filter_by=null, $filter_value=null){
+		$this->db->select('*');
+		$this->db->from('media_files');
+		if($filter_by<>null)
+			$this->db->where('id', $media_id);
+		$this->db->order_by('id desc');
+
+		$query = $this->db->get();
+		
+		return $this->db_trans->return_select($query);
+	}
+
+	function check_media_in_post($media_id){
+		$this->db->select('*');
+		$this->db->from('posts');
+		$this->db->where('primary_image', $media_id);
+
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0)
+			return true;
+		else
+			return false;
+	}
+
+	function check_media_in_post_media($media_id){
+		$this->db->select('*');
+		$this->db->from('post_media');
+		$this->db->where('media_id', $media_id);
+
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0)
+			return true;
 		else
 			return false;
 	}

@@ -323,8 +323,6 @@
 				$('#point-title').val(data.title);
 				$('#point-point').val(data.point);
 				$('#point-price').val(data.price);
-				
-				$('#modal-edit-event').modal('show');
 			}
 		});
 	}

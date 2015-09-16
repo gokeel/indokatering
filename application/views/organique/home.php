@@ -118,21 +118,21 @@
     <div class="row">
       <div class="col-xs-12  col-sm-4  push-down-30">
         <div class="motivational-stories__circle">
-          <span class="glyphicon  glyphicon-heart"></span>
+          <span class="glyphicon  glyphicon-heart" style="color:#DC2742"></span>
         </div>
         <h5>It is good for your heart</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor pulvinar et, cursus quis neque. Donec suscipit dui leo, vehicula pellentesque nunc rhoncus vel. Aliquam tempus justo eu orci faucibus fermentum. </p>
       </div>
       <div class="col-xs-12  col-sm-4  push-down-30">
         <div class="motivational-stories__circle">
-          <span class="glyphicon  glyphicon-leaf"></span>
+          <span class="glyphicon  glyphicon-leaf" style="color:#DC2742"></span>
         </div>
         <h5>Because it is from nature</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor pulvinar et, cursus quis neque. Donec suscipit dui leo, vehicula pellentesque nunc rhoncus vel. Aliquam tempus justo eu orci faucibus fermentum. </p>
       </div>
       <div class="col-xs-12  col-sm-4  push-down-30">
         <div class="motivational-stories__circle">
-          <span class="glyphicon  glyphicon-record"></span>
+          <span class="glyphicon  glyphicon-record" style="color:#DC2742"></span>
         </div>
         <h5>It increase your health resistance</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor pulvinar et, cursus quis neque. Donec suscipit dui leo, vehicula pellentesque nunc rhoncus vel. Aliquam tempus justo eu orci faucibus fermentum. </p>
@@ -346,4 +346,4 @@
   ?>
   <!-- ./Products -->
 </div><!-- ./Products-container -->
-<div class="simple-map  js--where-we-are" data-latlng="<?php echo $options['company_map_lat'];?>,<?php echo $options['company_map_long'];?>" data-markers="[{lat: <?php echo $options['company_map_lat'];?>,lng: <?php echo $options['company_map_long'];?>,title: '<?php echo $options['company_map_name'];?>'}]" data-zoom="14"></div>
+<!-- <div class="simple-map  js--where-we-are" data-latlng="<?php echo $options['company_map_lat'];?>,<?php echo $options['company_map_long'];?>" data-markers="[{lat: <?php echo $options['company_map_lat'];?>,lng: <?php echo $options['company_map_long'];?>,title: '<?php echo $options['company_map_name'];?>'}]" data-zoom="14"></div> -->

@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-xs-12  col-sm-6">
         <div class="top__slogan">
-          <?php echo $options['web_slogan']; ?>
+          <?php // echo $options['web_slogan']; ?>
         </div>
       </div>
       <div class="col-xs-12  col-sm-6">

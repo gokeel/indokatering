@@ -152,17 +152,15 @@
 				</a>
 				<ul class="treeview-menu">
 					<li class="<?php echo ($asm_1=='view_all' ? 'active' : '');?>">
-						<a href="#">
+						<a href="<?php echo base_url('cms/media_view_all');?>">
 							<i class="fa fa-expand"></i>
 							View All
-							<i class="fa fa-angle-left pull-right"></i>
 						</a>
 					</li>
 					<li class="<?php echo ($asm_1=='new' ? 'active' : '');?>">
 						<a href="#">
 							<i class="fa fa-expand"></i>
 							Add New
-							<i class="fa fa-angle-left pull-right"></i>
 						</a>
 					</li>
 				</ul>	

@@ -30,32 +30,35 @@
 	<script type="text/javascript" src="<?php echo GENERAL_JS_DIR;?>/moment.js"></script>
 	<script type="text/javascript" src="<?php echo GENERAL_JS_DIR;?>/bootstrap-datetimepicker.js"></script>
 	<!-- page script -->
-    <script type="text/javascript">
-      $(function () {
-        $("#default-table").dataTable({
-			"bSort": false,
-			"iDisplayLength": 25,
-			"bLengthChange": true
-		});
+  <script type="text/javascript">
+    $(function () {
+      $("#default-table").dataTable({
+  			"bSort": false,
+  			"iDisplayLength": 25,
+  			"bLengthChange": true
+  		});
+      $("#table-10rows").dataTable({
+        "bSort": false,
+        "iDisplayLength": 10,
+        "bLengthChange": true
       });
+    });
 	  //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-          checkboxClass: 'icheckbox_minimal-red',
-          radioClass: 'iradio_minimal-red'
-        });
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-          checkboxClass: 'icheckbox_flat-green',
-          radioClass: 'iradio_flat-green'
-        });
-		
-		
-    </script>
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+  </script>
   <script>
   (function refresh_notification() {
     $.ajax({

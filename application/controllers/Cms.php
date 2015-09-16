@@ -371,6 +371,20 @@ class Cms extends MY_Controller {
 		$this->open_page('admin_notifications', $data);
 	}
 
+	function media_view_all(){
+		$data = array(
+			'am' => 'media',
+			'asm_1' => 'view_all',
+			'title_page' => 'Media'
+			);
+
+		$this->load->model('Content_m', 'content');
+
+		$data['media'] = $this->content->get_media();
+
+		$this->open_page('admin_media_view_all', $data);
+	}
+
 	/* end pages */
 
 	public function add_post(){
@@ -832,5 +846,67 @@ class Cms extends MY_Controller {
 		$response['notif_unread'] = $this->notification->count_unread();
 
 		echo json_encode($response);
+	}
+
+	function media_add(){
+		$this->load->library('upload');
+		$this->load->library('Db_trans');
+		$config = array(
+			'upload_path' => './assets/uploads/',
+			'allowed_types' => 'jpg|png|jpeg|mp3|mp4|wmv',
+			'overwrite' => false,
+			'remove_spaces' => true,
+			'max_size' => '50000'
+		);
+		$this->upload->initialize($config);
+		
+		if ( ! $this->upload->do_upload('image_file')){
+			//$error = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('err_no', "204");
+			$this->session->set_flashdata('err_msg', $this->upload->display_errors());
+		} 
+		else{
+			$upload_data = $this->upload->data();
+			//insert document data in database
+	
+			$data = array(
+				'file_name' => $upload_data['file_name'],
+				'file_type' => $upload_data['file_type'],
+				'file_extension' => $upload_data['file_ext'],
+				'img_width' => $upload_data['image_width'],
+				'img_height' => $upload_data['image_height'],
+			);
+			$insert_file = $this->db_trans->insert_data('media_files', $data); // return the last inserted id
+        }
+
+		redirect('cms/media_view_all');
+	}
+
+	function media_delete(){
+		$this->load->library('Db_trans');
+		$this->load->model('Content_m', 'content');
+
+		$media_id = $this->uri->segment(3);
+		$any_in_post = false;
+		// check if the media is in any post or post_media
+		if($this->content->check_media_in_post($media_id))
+			$any_in_post = true;
+		if($this->content->check_media_in_post_media($media_id))
+			$any_in_post = true;
+
+		if($any_in_post){
+			$this->session->set_flashdata('err_no', "204");
+			$this->session->set_flashdata('err_msg', "Media you wish to delete is embedded in a post, please change image in your post then delete it.");
+		}
+		else{
+			//get the filename and delete from storage
+			$get = $this->content->get_post_image($media_id);
+			$filename = $get->file_name;
+			// delete from database
+			$this->db_trans->delete_from_table_by_id('media_files', 'id', $media_id);
+			// delete from storage
+			unlink('./assets/uploads/'.$filename);
+		}
+		redirect('cms/media_view_all');
 	}
 }

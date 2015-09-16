@@ -2,6 +2,7 @@
 	define('ADMIN_LTE_DIR', base_url('assets/themes/adminlte/'));
 	define('GENERAL_JS_DIR', base_url('assets/themes/js/'));
 	define('GENERAL_CSS_DIR', base_url('assets/themes/css/'));
+  define('UPLOAD_IMAGE_DIR', base_url('assets/uploads/'));
 ?>
 <!DOCTYPE html>
 <html>
