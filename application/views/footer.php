@@ -20,6 +20,9 @@
     <script src="<?php echo ADMIN_LTE_DIR;?>/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <!-- FastClick -->
     <script src='<?php echo ADMIN_LTE_DIR;?>/plugins/fastclick/fastclick.min.js'></script>
+    <!-- Morris Chart -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="<?php echo ADMIN_LTE_DIR;?>/plugins/morris/morris.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo ADMIN_LTE_DIR;?>/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->

@@ -17,7 +17,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 			<li class="treeview <?php echo ($am=='dashboard' ? 'active' : '');?>">
-              <a href="#">
+              <a href="<?php echo base_url('cms/dashboard'); ?>">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -66,6 +66,27 @@
 							<i class="fa fa-circle-o"></i>
 							Category
 						</a>
+					</li>
+					<li class="<?php echo ($asm_1=='slider_image' ? 'active' : '');?>">
+						<a href="#">
+							<i class="fa fa-circle-o"></i>
+							Homepage Slider Image
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li class="<?php if(isset($asm_2)) echo ($asm_2=='view_all' ? 'active' : '');?>">
+								<a href="<?php echo base_url('cms/view_post?ty=home_image_slider');?>">
+									<i class="fa fa-circle-o"></i>
+									View all
+								</a>
+							</li>
+							<li class="<?php if(isset($asm_2)) echo ($asm_2=='new' ? 'active' : '');?>">
+								<a href="<?php echo base_url('cms/home_image_slider_new');?>">
+									<i class="fa fa-circle-o"></i>
+									Add new
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</li>
@@ -145,25 +166,11 @@
 				</ul>
 			</li>
 			<li class="treeview <?php echo ($am=='media' ? 'active' : '');?>">
-				<a href="<?php echo base_url();?>">
-					<i class="fa fa-cogs"></i>
+				<a href="<?php echo base_url('cms/media_view_all');?>">
+					<i class="fa fa-file"></i>
 					Media
-					<i class="fa fa-angle-left pull-right"></i>
+					<i class="fa"></i>
 				</a>
-				<ul class="treeview-menu">
-					<li class="<?php echo ($asm_1=='view_all' ? 'active' : '');?>">
-						<a href="<?php echo base_url('cms/media_view_all');?>">
-							<i class="fa fa-expand"></i>
-							View All
-						</a>
-					</li>
-					<li class="<?php echo ($asm_1=='new' ? 'active' : '');?>">
-						<a href="#">
-							<i class="fa fa-expand"></i>
-							Add New
-						</a>
-					</li>
-				</ul>	
 			</li>
 			<li class="treeview <?php echo ($am=='setting' ? 'active' : '');?> ">
 				<a href="#">

@@ -3,13 +3,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
 		<h1>
-			All Post
-			<small><a href="<?php echo base_url('cms/post_new');?>">Add new post</a></small>
+			All Image Slider on Homepage
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Post</a></li>
-			<li class="active"><a href="#">View All</a></li>
+			<li><a href="#">Setting</a></li>
+			<li class="active"><a href="#">Homepage Image Slider</a></li>
 		</ol>
     </section>
 	
@@ -23,14 +22,12 @@
 					List
                 </div><!-- /.box-header -->
                 <div class="box-body">
-					<table id="default-table" class="table table-bordered table-striped">
+					<table id="table-10rows" class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>Title</th>
-								<th>Author</th>
-								<th>Category</th>
-								<th>Tags</th>
-								<th>Status</th>
+								<th>Image</th>
+								<th>Content</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -39,21 +36,23 @@
 								foreach($post->result() as $row){?>
 							<tr>
 								<td><?php echo $row->title;?></td>
-								<td><?php echo $row->first_name;?></td>
-								<td><?php echo $row->category_name;?></td>
-								<td><?php echo $row->tags;?></td>
-								<td><?php echo $row->status;?></td>
 								<td>
-									<a href="<?php echo base_url('cms/post_edit?id='.$row->id);?>">
+									<img src="<?php echo UPLOAD_IMAGE_DIR.'/'.$primary_image[$row->id]; ?>" width="420px" height="210px" />';
+								</td>
+								<td><?php echo $row->content;?></td>
+								<td>
+									<a href="<?php echo base_url('cms/home_image_slider_edit?id='.$row->id);?>">
 										<button class="btn btn-primary btn-xs">
 											<i class="fa fa-edit"></i> Edit
 										</button>
 									</a>
-									<a href="<?php echo base_url('cms/delete_post?ty=post&id='.$row->id);?>">
+									<?php if(sizeof($post->result()) > 1) {?>
+									<a href="<?php echo base_url('cms/delete_post?ty=home_image_slider&id='.$row->id);?>">
 										<button class="btn btn-danger btn-xs">
 											<i class="fa fa-trash-o"></i> Delete
 										</button>
 									</a>
+									<?php } ?>
 								</td>
 							</tr>
 							<?php }	?>	
@@ -66,6 +65,7 @@
 	</section>
 		  
 </div><!-- /.content-wrapper -->
+
 
 <?php include('footer.php');?>
 </body>

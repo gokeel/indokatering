@@ -27,6 +27,28 @@ class Cms extends MY_Controller {
 			redirect('cms/login');
 	}
 
+	function dashboard(){
+		$data = array(
+			'am' => 'dashboard',
+			'asm_1' => '',
+			'title_page' => 'Dashboard',
+			'title' => ''
+			);
+		$this->load->model('User_m', 'user');
+		$this->load->model('Order_m', 'order');
+
+		$count_customer = $this->user->get_user_data('user_level', 'customer');
+		$data['count_customer'] = $count_customer->num_rows();
+
+		$count_order = $this->order->view_order_summary();
+		$data['count_order'] = $count_order->num_rows();
+
+		$grouping_order = $this->order->count_order_grouping_date();
+		$data['total_sales_per_date'] = $grouping_order->result();
+
+		$this->open_page('admin_dashboard', $data);
+	}
+
 	public function login(){
 		$this->session->set_userdata('curr_page', $this->uri->segment(1).'/'.$this->uri->segment(2));
 		$this->load->view('admin_login');
@@ -56,6 +78,15 @@ class Cms extends MY_Controller {
 			'title_page' => 'View all '.$type.'s',
 			'title' => 'view'
 			);
+		if($type=="home_image_slider")
+			$data = array(
+				'am' => 'post',
+				'asm_1' => 'slider_image',
+				'asm_2' => 'view_all',
+				'title_page' => 'View all '.$type.'s',
+				'title' => 'view'
+				);
+
 		$data['post'] = $this->content->get_post_data($type);
 		//get the category name for each category id on all post
 		if($data['post']<>false){
@@ -74,8 +105,18 @@ class Cms extends MY_Controller {
 			//get detail data on post type
 			if($type=="product")
 				$data['prod_detail'] = $this->get_product_detail($data['post']->result());
+			else if($type=="home_image_slider"){
+				foreach($data['post']->result() as $row){
+					if($row->primary_image<>""){
+						// get image data for each
+						$post_image = $this->content->get_post_image($row->primary_image);
+						$data['primary_image'][$row->id] = $post_image->file_name;
+						
+					}
+					else $data['primary_image'][$row->id] = null;
+				}
+			}
 		}
-		//print_r($data['prod_detail']);
 
 		$this->open_page('admin_'.$type.'_view_all', $data);
 	}
@@ -385,6 +426,37 @@ class Cms extends MY_Controller {
 		$this->open_page('admin_media_view_all', $data);
 	}
 
+	public function home_image_slider_edit(){
+		$this->load->model('Content_m', 'content');
+		$data = array(
+			'am' => 'post',
+			'asm_1' => 'slider_image',
+			'title_page' => 'Edit Image Slider',
+			'title' => 'edit'
+			);
+		// get post data by post id and return to client
+		$post_data = $this->content->get_post_data('home_image_slider','a.id', $this->input->get('id', TRUE));
+		$data['post_data'] = $post_data->row();
+		// get post image
+		$data['post_image'] = $this->content->get_post_image($data['post_data']->primary_image);
+		
+		$this->open_page('admin_home_image_slider_creation', $data);
+	}
+
+	public function home_image_slider_new(){
+		$this->load->model('Content_m', 'content');
+		$data = array(
+			'am' => 'post',
+			'asm_1' => 'slider_image',
+			'asm_2' => 'new',
+			'title_page' => 'Add new post',
+			'title' => 'add'
+			);
+		// get category
+		$data['category'] = $this->content->get_category('category_part', 'post');
+		$this->open_page('admin_home_image_slider_creation', $data);
+	}
+
 	/* end pages */
 
 	public function add_post(){
@@ -415,8 +487,21 @@ class Cms extends MY_Controller {
 	public function delete_post(){
 		$type = $this->input->get('ty');
 		$id = $this->input->get('id', TRUE);
+
+		$this->load->model('Content_m', 'content');
+		$post_data = $this->content->get_post_data($type,'a.id', $id);
+		$primary_image = $post_data->row()->primary_image;
+
 		$this->load->library('Db_trans');
 		$this->db_trans->delete_from_table_by_id('posts', 'id', $id);
+
+		//get the filename and delete from storage
+		$get = $this->content->get_post_image($primary_image);
+		$filename = $get->file_name;
+		// delete from database
+		$this->db_trans->delete_from_table_by_id('media_files', 'id', $primary_image);
+		// delete from storage
+		unlink('./assets/uploads/'.$filename);
 
 		redirect('cms/view_post?ty='.$type);
 	}
@@ -509,7 +594,7 @@ class Cms extends MY_Controller {
 			'allowed_types' => 'jpg|png|jpeg',
 			'overwrite' => false,
 			'remove_spaces' => true,
-			'max_size' => '4000'
+			'max_size' => '50000'
 		);
 		$this->upload->initialize($config);
 		
@@ -908,5 +993,30 @@ class Cms extends MY_Controller {
 			unlink('./assets/uploads/'.$filename);
 		}
 		redirect('cms/media_view_all');
+	}
+
+	public function add_image_slider(){
+		$this->load->model('Content_m', 'content');
+		$this->load->library('Db_trans');
+		$data = $this->general_post_data();
+		$last_id = $this->db_trans->insert_data('posts', $data);
+
+		if (! empty($_FILES['image_file']['name']))
+			$this->upload_set_primary_image($last_id);
+
+		redirect('cms/view_post?ty='.$this->input->post('type', TRUE));
+	}
+
+	public function update_image_slider(){
+		$id = $this->input->get('id', TRUE);
+		$this->load->model('Content_m', 'content');
+		$this->load->library('Db_trans');
+		$data = $this->general_post_data();
+		$update = $this->db_trans->update_data_on_table('posts', 'id', $id, $data);
+
+		if (! empty($_FILES['image_file']['name']))
+			$this->upload_set_primary_image($id);
+
+		redirect('cms/view_post?ty='.$this->input->post('type', TRUE));
 	}
 }

@@ -168,94 +168,94 @@
       </div>
       <div class="col-xs-12  col-md-7">
         <nav class="navbar  navbar-default" role="navigation">
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse  navbar-collapse" id="collapsible-navbar">
-    <ul class="nav  navbar-nav">
-      <li>
-        <a href="<?php echo base_url();?>" class="dropdown-toggle">Home</a>
-      </li>
-      <li>
-        <a href="<?php echo base_url('catering');?>" class="dropdown-toggle">Catering</a>
-      </li>
-      <li>
-        <a href="<?php echo base_url('ready-to-eat');?>" class="dropdown-toggle">Ready To Eat</a>
-      </li>
-      <!-- <li><a href="#">Catering</a></li>
-      <li><a href="#">Recipes</a></li> -->
-      <li>
-        <a href="<?php echo base_url('points');?>">Beli Poin</a>
-      </li>
-      <li>
-        <a href="<?php echo base_url('blog/cat/resep');?>">Resep</a>
-      </li>
-    </ul>
-    <!-- search for mobile devices -->
-    <form action="#" method="post" class="visible-xs  visible-sm  mobile-navbar-form" role="form">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search">
-        <span class="input-group-addon">
-          <button type="submit" class="mobile-navbar-form__appended-btn"><span class="glyphicon  glyphicon-search  glyphicon-search--nav"></span></button>
-        </span>
-      </div>
-    </form>
-    <div class="mobile-cart  visible-xs  visible-sm  push-down-15">
-        <span class="header-cart__text--price"><span class="header-cart__text">CART</span> Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
-      <a href="cart.html" class="header-cart__items">
-        <span id="mobile-cart-num" class="header-cart__items-num"><?php echo $cart['count'];?></span>
-      </a>
-    </div>
-  </div><!-- /.navbar-collapse -->
-</nav>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse  navbar-collapse" id="collapsible-navbar">
+            <ul class="nav  navbar-nav">
+              <li>
+                <a href="<?php echo base_url();?>" class="dropdown-toggle">Home</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('catering');?>" class="dropdown-toggle">Catering</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('ready-to-eat');?>" class="dropdown-toggle">Ready To Eat</a>
+              </li>
+              <!-- <li><a href="#">Catering</a></li>
+              <li><a href="#">Recipes</a></li> -->
+              <li>
+                <a href="<?php echo base_url('points');?>">Beli Poin</a>
+              </li>
+              <li>
+                <a href="<?php echo base_url('blog/cat/resep');?>">Resep</a>
+              </li>
+            </ul>
+            <!-- search for mobile devices -->
+            <form action="#" method="post" class="visible-xs  visible-sm  mobile-navbar-form" role="form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon">
+                  <button type="submit" class="mobile-navbar-form__appended-btn"><span class="glyphicon  glyphicon-search  glyphicon-search--nav"></span></button>
+                </span>
+              </div>
+            </form>
+            <div class="mobile-cart  visible-xs  visible-sm  push-down-15">
+                <span class="header-cart__text--price"><span class="header-cart__text">CART</span> Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
+              <a href="<?php echo base_url('frontpage/checkout');?>" class="header-cart__items">
+                <span id="mobile-cart-num" class="header-cart__items-num"><?php echo $cart['count'];?></span>
+              </a>
+            </div>
+          </div><!-- /.navbar-collapse -->
+        </nav>
       </div>
       <div class="col-xs-12  col-md-2  hidden-sm  hidden-xs">
         <!-- Cart in header -->
-<div class="header-cart">
-  <span class="header-cart__text--price"><span class="header-cart__text">CART</span> Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
-  <a href="#" class="header-cart__items">
-    <span id="header-cart-num" class="header-cart__items-num"><?php echo $cart['count'];?></span>
-  </a>
-  <!-- Open cart panel -->
-  
-  <div class="header-cart__open-cart">
-    <div id="cart-product">
-      <?php if($cart['count']>0){ 
-              foreach($cart['data'] as $row){?>
-      <div class="header-cart__product  clearfix  js--cart-remove-target">
-        <div class="header-cart__product-image">
-          <img alt="Product in the cart" src="<?php echo $this->config->item('upload_path').$row['image'];?>" width="40" height="50">
+        <div class="header-cart">
+          <span class="header-cart__text--price"><span class="header-cart__text">CART</span> Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
+          <a href="#" class="header-cart__items">
+            <span id="header-cart-num" class="header-cart__items-num"><?php echo $cart['count'];?></span>
+          </a>
+          <!-- Open cart panel -->
+          
+          <div class="header-cart__open-cart">
+            <div id="cart-product">
+              <?php if($cart['count']>0){ 
+                      foreach($cart['data'] as $row){?>
+              <div class="header-cart__product  clearfix  js--cart-remove-target">
+                <div class="header-cart__product-image">
+                  <img alt="Product in the cart" src="<?php echo $this->config->item('upload_path').$row['image'];?>" width="40" height="50">
+                </div>
+                <div class="header-cart__product-image--hover">
+                  <a onclick="remove_cart_item('<?php echo $row['id'];?>')" class="js--remove-item" data-target=".js--cart-remove-target"><span class="glyphicon  glyphicon-circle  glyphicon-remove"></span></a>\
+                </div>
+                <div class="header-cart__product-title">
+                  <a class="header-cart__link" href="#"><?php echo $row['title'];?></a>
+                  <span class="header-cart__qty">
+                    Qty: <?php echo $row['qty'];?> 
+                    <?php if($row['price'] >= 1000) echo 'x Rp '.number_format($row['price'], 0, '.', ',');
+                          else echo 'x '.$row['price'].' Poin';
+                    ?>
+                  </span>
+                </div>
+                <div class="header-cart__price">
+                  <?php 
+                    if($row['price']<1000)
+                      echo $row['total_price_item'].' Poin';
+                    else
+                      echo 'Rp '.number_format($row['total_price_item'], 0, '.', ',');?>
+                </div>
+              </div>
+              <?php }
+                } ?>
+            </div>
+          
+            <hr class="header-cart__divider">
+            <div class="header-cart__subtotal-box">
+              <span class="header-cart__subtotal">CART SUBTOTAL:</span>
+              <span class="header-cart__subtotal-price">Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
+            </div>
+            <a class="btn btn-darker" href="<?php echo base_url('frontpage/checkout');?>">Proceed to checkout</a>
+          </div>
         </div>
-        <div class="header-cart__product-image--hover">
-          <a onclick="remove_cart_item('<?php echo $row['id'];?>')" class="js--remove-item" data-target=".js--cart-remove-target"><span class="glyphicon  glyphicon-circle  glyphicon-remove"></span></a>\
-        </div>
-        <div class="header-cart__product-title">
-          <a class="header-cart__link" href="#"><?php echo $row['title'];?></a>
-          <span class="header-cart__qty">
-            Qty: <?php echo $row['qty'];?> 
-            <?php if($row['price'] >= 1000) echo 'x Rp '.number_format($row['price'], 0, '.', ',');
-                  else echo 'x '.$row['price'].' Poin';
-            ?>
-          </span>
-        </div>
-        <div class="header-cart__price">
-          <?php 
-            if($row['price']<1000)
-              echo $row['total_price_item'].' Poin';
-            else
-              echo 'Rp '.number_format($row['total_price_item'], 0, '.', ',');?>
-        </div>
-      </div>
-      <?php }
-        } ?>
-    </div>
-  
-    <hr class="header-cart__divider">
-    <div class="header-cart__subtotal-box">
-      <span class="header-cart__subtotal">CART SUBTOTAL:</span>
-      <span class="header-cart__subtotal-price">Rp <?php echo number_format($cart['total'], 0, '.', ',');?></span>
-    </div>
-    <a class="btn btn-darker" href="<?php echo base_url('frontpage/checkout');?>">Proceed to checkout</a>
-  </div>
-</div>
   
       </div>
     </div>

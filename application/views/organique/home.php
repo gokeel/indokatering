@@ -1,34 +1,44 @@
 <div id="carousel-example-generic" class="carousel  slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <?php 
+      $cnt = 0;
+      foreach($image_slider_data->result() as $row){
+    ?>
+    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $cnt;?>" <?php if($cnt==0) echo 'class="active"';?>></li>
+    <?php } ?>
+    <!-- <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item  active">
-      <img src="<?php echo ORGANIQUE_DIR;?>/images/organic-slider-1.jpg" alt="">
+    <?php 
+      $cnt = 0;
+      foreach($image_slider_data->result() as $row){
+    ?>
+    <div class="item <?php if($cnt==0) echo "active"?>">
+      <img src="<?php echo UPLOAD_IMAGE_DIR.'/'.$image_on_slider[$row->id];?>" alt="">
       <div class="carousel-caption">
-
         <div class="jumbotron__container">
           <h2 class="jumbotron__subtitle">
-            Awesome oppurtunity to save a lof of money on
+            <?php echo $row->content; ?>
           </h2>
           <h1 class="jumbotron__title">
-            Fresh organic food
+            <?php echo $row->title; ?>
           </h1>
           <!-- <a class="btn  btn-warning" href="http://themeforest.net/item/organique-html-template-for-healthy-food-store/6779086?ref=ProteusThemes" target="_blank">Buy theme</a> &nbsp; -->
-          <a class="btn  btn-jumbotron" href="features.html">More details</a>
+          <!-- <a class="btn  btn-jumbotron" href="features.html">More details</a> -->
         </div>
-
       </div>
     </div>
-    <div class="item">
+    <?php 
+        $cnt++;
+      } 
+    ?>
+    <!-- <div class="item">
       <img src="<?php echo ORGANIQUE_DIR;?>/images/organic-slider-2.jpg" alt="">
       <div class="carousel-caption">
-
         <div class="jumbotron__container">
           <h2 class="jumbotron__subtitle">
             Awesome oppurtunity to save a lof of money on
@@ -36,16 +46,13 @@
           <h1 class="jumbotron__title">
             Fresh organic food
           </h1>
-          <!-- <a class="btn  btn-warning" href="http://themeforest.net/item/organique-html-template-for-healthy-food-store/6779086?ref=ProteusThemes" target="_blank">Buy theme</a> &nbsp; -->
           <a class="btn  btn-jumbotron" href="features.html">More details</a>
         </div>
-
       </div>
     </div>
     <div class="item">
       <img src="<?php echo ORGANIQUE_DIR;?>/images/organic-slider-3.jpg" alt="">
       <div class="carousel-caption">
-
         <div class="jumbotron__container">
           <h2 class="jumbotron__subtitle">
             Awesome oppurtunity to save a lof of money on
@@ -53,12 +60,10 @@
           <h1 class="jumbotron__title">
             Fresh organic food
           </h1>
-          <!-- <a class="btn  btn-warning" href="http://themeforest.net/item/organique-html-template-for-healthy-food-store/6779086?ref=ProteusThemes" target="_blank">Buy theme</a> &nbsp; -->
           <a class="btn  btn-jumbotron" href="features.html">More details</a>
         </div>
-
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Controls -->

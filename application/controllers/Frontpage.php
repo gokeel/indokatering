@@ -126,6 +126,17 @@ class Frontpage extends MY_Controller {
 
 	public function home(){
 		$this->load->model('Content_m', 'content');
+		// get image slider
+		$data['image_slider_data'] = $this->content->get_post_data('home_image_slider');
+		foreach($data['image_slider_data']->result() as $row){
+			if($row->primary_image<>""){
+				// get image data for each
+				$post_image = $this->content->get_post_image($row->primary_image);
+				$data['image_on_slider'][$row->id] = $post_image->file_name;
+				
+			}
+			else $data['image_on_slider'][$row->id] = null;
+		}
 		// get products by category root
 		$data['menu_catering'] = $this->display_post_to_home($this->content->get_post_by_root_category('catering'));
 		$data['menu_rte'] = $this->display_post_to_home($this->content->get_post_by_root_category('ready-to-eat'));

@@ -54,7 +54,7 @@
     <div class="wrapper">
 	  <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo"><b>Makan</b>Enak</a>
+        <a href="index2.html" class="logo"><b>Indo</b>Katering</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -191,14 +191,14 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="<?php echo ADMIN_LTE_DIR;?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <!-- <img src="<?php echo ADMIN_LTE_DIR;?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" /> -->
                     <p>
                       Ocky Harliansyah
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
-                  <li class="user-body">
+                  <!-- <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
                     </div>
@@ -208,12 +208,12 @@
                     <div class="col-xs-4 text-center">
                       <a href="#">Friends</a>
                     </div>
-                  </li>
+                  </li> -->
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
                     </div>

@@ -90,7 +90,7 @@
 				dataType: "json",
 				success:function(data){
 					if(data.status == "200")
-						window.location.href = "<?php echo base_url('cms/view_order');?>";
+						window.location.href = "<?php echo base_url('cms/dashboard');?>";
 					else if(data.status == "204"){
 						$('#message').empty();
 						$('#message').append('Username and password not matched.');

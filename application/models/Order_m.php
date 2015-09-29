@@ -133,4 +133,12 @@ class Order_m extends CI_Model {
 		else
 			return false;
 	}
+
+	function count_order_grouping_date(){
+		$query = $this->db->query('select substr(entry_date, 1, 10) as sales_date, count(*) as total from orders
+					group by substr(entry_date, 1, 10)
+					order by substr(entry_date, 1, 10)
+					limit 0,30');
+		return $this->db_trans->return_select($query);
+	}
 }

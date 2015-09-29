@@ -10,6 +10,11 @@ class Users extends MY_Controller {
 	/* pages begin */
 	function open_page($file_name, $data=null){
 		if($this->is_logged_in()){
+			// get notifications
+			$this->load->library('notification');
+			$data['notifications'] = $this->notification->get_data();
+			$data['notif_unread'] = $this->notification->count_unread();
+			
 			$this->load->view('admin_header', $data);
 			$this->load->view('admin_sidebar_left');
 			$this->load->view($file_name);
